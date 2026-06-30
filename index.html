@@ -6,18 +6,26 @@
 </head>
 <body>
   <h1>Mini Balanço de Massa</h1>
-
+<div>
   <label>Concentração do feed (ppm):</label>
   <input type="number" id="feedPpm">
+</div>
 
+<div>
   <label>Massa do feed (g):</label>
   <input type="number" id="feedMassa">
+</div>
 
+<div>
   <label>Concentração do PLS (mg/L):</label>
   <input type="number" id="plsConc">
+</div>
 
+<div>
   <label>Volume do PLS (mL):</label>
   <input type="number" id="plsVolume">
+</div>
+
 
   <button id="botaoCalcular">Calcular</button>
 
@@ -36,7 +44,10 @@
         alert("Por favor, preencha todos os campos com valores válidos.");
         return;
       }
-
+      if (feedPpm <= 0 || feedMassa <= 0) {
+        alert("Concentração e massa do feed devem ser maiores que zero.");
+        return;
+      }
       var mFeed = feedPpm * feedMassa / 1000;
       var mPls = plsConc * plsVolume / 1000;
       var extracao = mPls / mFeed * 100;
