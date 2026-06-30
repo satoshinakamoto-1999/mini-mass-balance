@@ -26,6 +26,15 @@
   <input type="number" id="plsVolume">
 </div>
 
+<div>
+    <label>Concentração da lavagem (mg/L):</label>
+    <input type="number" id="washConc">
+</div>
+
+<div>
+    <label> Volume da lavagem (ml):</label>
+    <input type="number" id="washVol">
+</div>
 
   <button id="botaoCalcular">Calcular</button>
 
@@ -39,8 +48,9 @@
       var feedMassa = parseFloat(document.getElementById("feedMassa").value);
       var plsConc = parseFloat(document.getElementById("plsConc").value);
       var plsVolume = parseFloat(document.getElementById("plsVolume").value);
-
-      if (isNaN(feedPpm) || isNaN(feedMassa) || isNaN(plsConc) || isNaN(plsVolume)) {
+      var washConc = parseFloat(document.getElementById("washConc").value);
+      var washVol = parseFloat(document.getElementById("washVol").value);
+      if (isNaN(feedPpm) || isNaN(feedMassa) || isNaN(plsConc) || isNaN(plsVolume) || isNaN(washConc) || isNaN(washVol)) {
         alert("Por favor, preencha todos os campos com valores válidos.");
         return;
       }
@@ -50,8 +60,8 @@
       }
       var mFeed = feedPpm * feedMassa / 1000;
       var mPls = plsConc * plsVolume / 1000;
-      var extracao = mPls / mFeed * 100;
-
+      var mWash = washConc * washVol / 1000;
+      var extracao = (mPls - mWash) / mFeed * 100;
       document.getElementById("resultado").textContent = "Extração: " + extracao + "%";
     };
   </script>
