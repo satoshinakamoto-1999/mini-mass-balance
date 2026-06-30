@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Balanço de Massa</title>
+</head>
+<body>
+  <h1>Mini Balanço de Massa</h1>
+
+  <label>Concentração do feed (ppm):</label>
+  <input type="number" id="feedPpm">
+
+  <label>Massa do feed (g):</label>
+  <input type="number" id="feedMassa">
+
+  <label>Concentração do PLS (mg/L):</label>
+  <input type="number" id="plsConc">
+
+  <label>Volume do PLS (mL):</label>
+  <input type="number" id="plsVolume">
+
+  <button id="botaoCalcular">Calcular</button>
+
+  <p id="resultado"></p>
+
+  <script>
+    var botao = document.getElementById("botaoCalcular");
+
+    botao.onclick = function () {
+      var feedPpm = parseFloat(document.getElementById("feedPpm").value);
+      var feedMassa = parseFloat(document.getElementById("feedMassa").value);
+      var plsConc = parseFloat(document.getElementById("plsConc").value);
+      var plsVolume = parseFloat(document.getElementById("plsVolume").value);
+
+      if (isNaN(feedPpm) || isNaN(feedMassa) || isNaN(plsConc) || isNaN(plsVolume)) {
+        alert("Por favor, preencha todos os campos com valores válidos.");
+        return;
+      }
+
+      var mFeed = feedPpm * feedMassa / 1000;
+      var mPls = plsConc * plsVolume / 1000;
+      var extracao = mPls / mFeed * 100;
+
+      document.getElementById("resultado").textContent = "Extração: " + extracao + "%";
+    };
+  </script>
+</body>
+</html>
